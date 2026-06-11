@@ -58,8 +58,15 @@ concurrently. Record measured load times in each repo's decisions.md.
   needs a pre-release Ollama (>= 0.14.3); bead filed in chavdar.
 - `qwen3.6:35b` (24GB) vs `qwen3-vl:30b` for vidin stage 3: tighter KV headroom, eval
   on real footage when stage 3 lands.
+- `gemma4:31b` (~20-24GB Q4, dense, multimodal, 256K ctx) vs `qwen3-vl:30b` for vidin
+  stage 3: Gemma 4 (released 2026-04-02, Apache 2.0) wins multimodal + human-preference
+  benches (Arena Elo ~1452) while qwen3.6 wins agentic/static tasks; head-to-head on our
+  footage when stage 3 lands. NOTE 2026-06-11: the original research pass WRONGLY
+  excluded Gemma 4 as SEO rumor; corrected. Gemma 3 27B is now two generations old:
+  do not adopt it anywhere new.
 - Vela: qwen3.5/3.6 family as workhorse candidates (native vision could collapse a tier);
-  blocked on a redaction-quality eval, bead filed in personal-assistant.
+  blocked on a redaction-quality eval, bead filed in personal-assistant. Vela's designated
+  redaction fallback updates Gemma 3 27B QAT -> `gemma4:31b` (same eval gate applies).
 - TransNetV2 (~35M params, learned cut detector) vs ffmpeg scene threshold for vidin
   stage 1: clearly better on dissolves in published evals; decide on Frank eval evidence.
 
