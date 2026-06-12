@@ -8,9 +8,10 @@ upgrades happen. Updated 2026-06-11 (research pass + fleet upgrade). One GPU: RT
 
 | Agent | Tier / job | Model | VRAM (Q4) | Env var | Default set in | Status |
 |---|---|---|---|---|---|---|
-| vidin | stage 2 fast triage | `qwen3.5:9b` | ~7GB | `VIDIN_VISION_MODEL` | `vidin/vidin/vision_client.py` | default since 2026-06-11; Frank eval carries a `qwen2.5vl:3b` regression pass |
-| vidin | stage 2 fallback | `qwen2.5vl:3b` | ~3GB | (same) | n/a | kept pulled until the eval confirms the flip |
-| vidin | stage 3 deep analysis | `qwen3-vl:30b` | ~20GB | `VIDIN_DEEP_MODEL` (future) | not wired yet | pulled; stage 3 is a follow-up bead |
+| vidin | stage 2 fast triage | `qwen3.5:9b` | ~7GB | `VIDIN_VISION_MODEL` | `vidin/vidin/vision_client.py` | default since 2026-06-11; live comparison: old 3b flagged 71/71 (useless), 9b flagged 21/71 |
+| vidin | stage 2 fallback | `qwen2.5vl:3b` | ~3GB | (same) | n/a | retired from triage; drop after the formal eval lands |
+| vidin | stage 2.5 describe (all segments) | `gemma4:31b` | ~20GB | `VIDIN_DEEP_MODEL` | `vidin/vidin/run.py` | default since 2026-06-12; work types + descriptions + burn-in transcription |
+| vidin | stage 2.5/3 alternate | `qwen3-vl:30b` | ~20GB | `--deep-model` flag | n/a | benchmark alternate (bead drz-56n); stage 3 deep analysis still a follow-up bead |
 | vidin | second opinion, temporal artifacts | `minicpm-v4.5:q4_K_M` | ~7GB | `VIDIN_VISION_MODEL_2ND` (future) | not wired yet | pulled; disagreement -> needs_human tier is a follow-up bead |
 | chavdar | code/security review | `qwen3.6:27b` | ~19GB | `CHAVDAR_LOCAL_MODEL` | `chavdar/chavdar/model_client.py` | default since 2026-06-11 (was `qwen3:8b`, the noisy-review culprit) |
 | chavdar | cloud reviewer | `anthropic:<model>` | n/a | CLI `--reviewer` | `chavdar/chavdar/cli.py` | adapter ready, awaiting `ANTHROPIC_API_KEY` (bead drz-x3r) |
@@ -23,6 +24,7 @@ upgrades happen. Updated 2026-06-11 (research pass + fleet upgrade). One GPU: RT
 
 `qwen3:30b-a3b-instruct-2507-q4_K_M` (18GB) - `qwen3:8b` (5.2GB) - `qwen2.5vl:3b` (3.2GB)
 - `qwen3.5:9b` (6.6GB) - `qwen3-vl:30b` (20GB) - `qwen3.6:27b` (17GB) - `minicpm-v4.5:q4_K_M` (~6GB)
+- `gemma4:31b` (~20GB, pulled 2026-06-12)
 
 ## VRAM doctrine
 
